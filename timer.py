@@ -56,8 +56,7 @@ def sleeper():
 					mA_secondMeasurementReg25,mA_secondMeasurementReg26,mA_secondMeasurementReg27,mA_secondMeasurementReg28,mA_secondMeasurementReg29,\
 					relay1_config16,relay1_config17,relay1_config18,relay1_config19,relay1_config20,relay1_config21,relay1_config22,relay1_config23,\
 					relay2_config16,relay2_config17,relay2_config18,relay2_config19,relay2_config20,relay2_config21,relay2_config22,relay2_config23,\
-					relay3_config16,relay3_config17,relay3_config18,relay3_config19,relay3_config20,relay3_config21,relay3_config22,relay3_config23\
-					))
+					relay3_config16,relay3_config17,relay3_config18,relay3_config19,relay3_config20,relay3_config21,relay3_config22,relay3_config23))
 			
 					conn.commit()
 			
@@ -173,7 +172,7 @@ def sleeper():
 				try:
 					instrument.write_register(21, 2, 1) #  a.  Write register 0x15 with 2 to access Relay #3.
 					relay3_config16 = instrument.read_register(22, 1)  # b.Read/write registers 0x16 thru 0x023 for Relay #3 configuration settings.
-					relay3_config17 = instrument.read_register(23,1)
+					relay3_config17 = instrument.read_register(23, 1)
 					relay3_config18 = instrument.read_register(24, 1)
 					relay3_config19 = instrument.read_register(25, 1)
 					relay3_config20 = instrument.read_register(26, 1)
@@ -201,10 +200,7 @@ def sleeper():
 		#			main()
 			print('After: %s\n' % time.ctime())
 		#else:
-		#	exit() 
-        
- 
- 
+		#	exit()  
 try:
 	sleeper()
 except KeyboardInterrupt:

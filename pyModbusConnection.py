@@ -58,14 +58,14 @@ def insertReading(conn):
 		
 def connectModbusSlave():
 	try:
-		instrument = minimalmodbus.Instrument("COM18",1) # port name, slave address (in decimal)
-	except Exception as e:
-			print e
-			print("error whie opening port")
+		instrument = minimalmodbus.Instrument("COM3",1) # port name, slave address (in decimal)
+	except:
+		print("Error in OPENING Device")
 
 ## 1st measurement PH/COND ##
 	try:
 		instrument.write_register(52, 0, 1) #  a. Write register 0x34 with 0 to access channel#1.  # Registernumber, value, number of decimals for storage
+		time.sleep(5)
 		pH_firstMeasurement = instrument.read_register(63, 1) # b.Read register 0x3F for pH value channel #1 value.  #Registernumber, number of decimals
 		temp_firstMeasurement = instrument.read_register(67,1) # c.Read register 0x43 for Temperature channel #1 value.  #Registernumber, number of decimals
 		
@@ -74,10 +74,8 @@ def connectModbusSlave():
 		print pH_firstMeasurement 
 		print "temp1="
 		print temp_firstMeasurement
-	except Exception as e:
-			print e
-			print("Error in 1st measurement PH/COND")
-		#print(ex1)
+	except:
+		print("Error in 1st measurement PH/COND")
 	## 2nd measurement PH/COND ##
 	try:
 		instrument.write_register(52, 1, 1) #  a. Write register 0x34 with 1 to access channel#1.  # Registernumber, value, number of decimals for storage
@@ -87,9 +85,8 @@ def connectModbusSlave():
 		print(pH_secondMeasurement)
 		print "temp2="
 		print(temp_secondMeasurement)
-	except Exception as e:
-			print e
-			print("Error in 2nd measurement PH/COND")
+	except:
+		print("Error in 2nd measurement PH/COND")
 
 	## mA Output 1 ##
 	try:
@@ -102,9 +99,8 @@ def connectModbusSlave():
 
 		print("mA Output 1 Configuration values:")
 		print(mA_FirstMeasurementReg25,mA_FirstMeasurementReg26,mA_FirstMeasurementReg27,mA_FirstMeasurementReg28,mA_FirstMeasurementReg29)
-	except Exception as e:
-			print e
-			print("Error in mA Output 1 Configuration values")
+	except:
+		print("Error in mA Output 1 Configuration values")
 
 	## mA Output 2 ##
 	try:
@@ -117,9 +113,8 @@ def connectModbusSlave():
 
 		print("mA Output 2 Configuration values:")
 		print(mA_secondMeasurementReg25,mA_secondMeasurementReg26,mA_secondMeasurementReg27,mA_secondMeasurementReg28,mA_secondMeasurementReg29)
-	except Exception as e:
-			print e
-			print("Error in mA Output 2 Configuration values")
+	except:
+		print("Error in mA Output 2 Configuration values")
 
 	## Relay 1-3 ##
 	## Relay 1 ##
@@ -135,9 +130,8 @@ def connectModbusSlave():
 		relay1_config23 = instrument.read_register(29, 1)
 		print("Relay 1 Configuration values:")
 		print(relay1_config16,relay1_config17,relay1_config18,relay1_config19,relay1_config20,relay1_config21,relay1_config22,relay1_config23)
-	except Exception as e:
-			print e
-			print("Error in Relay 1 Configuration values");
+	except:
+		print("Error in Relay 1 Configuration values");
 
 	## Relay 2 ##
 	try:
@@ -152,9 +146,8 @@ def connectModbusSlave():
 		relay2_config23 = instrument.read_register(29, 1)
 		print("Relay 2 Configuration values:")
 		print(relay2_config16,relay2_config17,relay2_config18,relay2_config19,relay2_config20,relay2_config21,relay2_config22,relay2_config23)
-	except Exception as e:
-			print e
-			print("Error in Relay 2 Configuration values")
+	except:
+		print("Error in Relay 2 Configuration values")
 
 	## Relay 3 ##
 	try:
@@ -169,9 +162,8 @@ def connectModbusSlave():
 		relay3_config23 = instrument.read_register(29, 1)
 		print("Relay 3 Configuration values:")
 		print(relay3_config16,relay3_config17,relay3_config18,relay3_config19,relay3_config20,relay3_config21,relay3_config22,relay3_config23)
-	except Exception as e:
-			print e
-			print("Error in Relay 3 Configuration values")
+	except:
+		print("Error in Relay 3 Configuration values")
 	
 def main():
 	database = "D:\\sqlite\ModbusSensor.db"
