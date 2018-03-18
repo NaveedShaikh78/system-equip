@@ -58,15 +58,20 @@ def insertReading(conn):
 		
 def connectModbusSlave():
 	try:
-		instrument = minimalmodbus.Instrument("COM3",1) # port name, slave address (in decimal)
+		instrument = minimalmodbus.Instrument("COM18",1) # port name, slave address (in decimal)
+		instrument.serial.baudrate= 9600
+		#instrument.serial.open()
+		#instrument.serial.parity = serial.PARITY_NONE
+		#instrument.serial.stopbits = 2
+		#instrument.serial.timeout = 0.05 # seconds
 	except:
 		print("Error in OPENING Device")
 
 ## 1st measurement PH/COND ##
 	try:
-		instrument.write_register(52, 0, 1) #  a. Write register 0x34 with 0 to access channel#1.  # Registernumber, value, number of decimals for storage
+		instrument.write_register(52, 0, 1, 6) #  a. Write register 0x34 with 0 to access channel#1.  # Registernumber, value, number of decimals for storage
 		time.sleep(5)
-		pH_firstMeasurement = instrument.read_register(63, 1) # b.Read register 0x3F for pH value channel #1 value.  #Registernumber, number of decimals
+		pH_firstMeasurement = instrument.read_register(63, 2) # b.Read register 0x3F for pH value channel #1 value.  #Registernumber, number of decimals
 		temp_firstMeasurement = instrument.read_register(67,1) # c.Read register 0x43 for Temperature channel #1 value.  #Registernumber, number of decimals
 		
 		
@@ -74,11 +79,11 @@ def connectModbusSlave():
 		print pH_firstMeasurement 
 		print "temp1="
 		print temp_firstMeasurement
-	except:
-		print("Error in 1st measurement PH/COND")
+	except Exception as e:
+        	print e
 	## 2nd measurement PH/COND ##
 	try:
-		instrument.write_register(52, 1, 1) #  a. Write register 0x34 with 1 to access channel#1.  # Registernumber, value, number of decimals for storage
+		#instrument.write_register(52, 1, 1) #  a. Write register 0x34 with 1 to access channel#1.  # Registernumber, value, number of decimals for storage
 		pH_secondMeasurement = instrument.read_register(63, 1) # b.Read register 0x3F for pH value channel #1 value.  #Registernumber, number of decimals
 		temp_secondMeasurement = instrument.read_register(67,1) # c.Read register 0x43 for Temperature channel #1 value.  #Registernumber, number of decimals
 		print "pH2="
