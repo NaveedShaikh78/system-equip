@@ -15,6 +15,7 @@ global relay1_config16,relay1_config17,relay1_config18,relay1_config19,relay1_co
 global relay2_config16,relay2_config17,relay2_config18,relay2_config19,relay2_config20,relay2_config21,relay2_config22,relay2_config23
 global relay3_config16,relay3_config17,relay3_config18,relay3_config19,relay3_config20,relay3_config21,relay3_config22,relay3_config23
 global flg
+
 def sleeper():
     while True:
 		flg='k'
@@ -67,7 +68,7 @@ def sleeper():
 			
 			def connectModbusSlave():
 				try:
-					instrument = minimalmodbus.Instrument("COM3",1) # port name, slave address (in decimal)
+					instrument = minimalmodbus.Instrument("COM18",1) # port name, slave address (in decimal)
 				except:
 					print("Error in OPENING Device")
 

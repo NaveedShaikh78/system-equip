@@ -71,6 +71,7 @@ def connectModbusSlave():
 	try:
 		instrument.write_register(52, 0, 1, 6) #  a. Write register 0x34 with 0 to access channel#1.  # Registernumber, value, number of decimals for storage
 		time.sleep(5)
+		#
 		pH_firstMeasurement = instrument.read_register(63, 2) # b.Read register 0x3F for pH value channel #1 value.  #Registernumber, number of decimals
 		temp_firstMeasurement = instrument.read_register(67,1) # c.Read register 0x43 for Temperature channel #1 value.  #Registernumber, number of decimals
 		
